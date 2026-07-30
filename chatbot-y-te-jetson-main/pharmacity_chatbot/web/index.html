@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chatbot Tra Cứu Thuốc Pharmacity</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="chat-panel" aria-label="Chatbot tra cứu thuốc">
+        <header class="chat-header">
+          <div>
+            <p class="eyebrow">Nguồn Pharmacity</p>
+            <h1>Chatbot tra cứu thuốc</h1>
+          </div>
+          <button id="voiceButton" class="icon-button" type="button" aria-label="Hỏi bằng giọng nói" title="Hỏi bằng giọng nói">
+            <span aria-hidden="true">🎙</span>
+          </button>
+        </header>
+
+        <div id="messages" class="messages" aria-live="polite">
+          <article class="message bot">
+            Xin chào, bạn hãy hỏi tên thuốc hoặc cách dùng, công dụng, thành phần, lưu ý của thuốc. Mình sẽ tìm trên Pharmacity và cho bạn chọn đúng sản phẩm.
+          </article>
+        </div>
+
+        <section id="productArea" class="product-area" aria-label="Chọn sản phẩm" hidden>
+          <div class="product-area-top">
+            <strong>Chọn sản phẩm cần tra cứu</strong>
+            <span id="searchMeta"></span>
+          </div>
+          <div id="productGrid" class="product-grid"></div>
+        </section>
+
+        <section id="manualPanel" class="manual-panel" aria-label="Nhập tên thuốc" hidden>
+          <label>
+            <span>Nhập lại tên thuốc</span>
+            <input id="manualInput" type="text" autocomplete="off" placeholder="Ví dụ: Panadol, Ramifix..." />
+          </label>
+          <div id="keyboard" class="keyboard" aria-label="Bàn phím ảo"></div>
+          <div class="manual-actions">
+            <button id="manualCancel" type="button">Hủy</button>
+            <button id="manualSubmit" type="button">Tìm thuốc</button>
+          </div>
+        </section>
+
+        <form id="chatForm" class="composer">
+          <input id="questionInput" type="text" autocomplete="off" placeholder="Ví dụ: Panadol uống thế nào?" />
+          <button type="submit">Gửi</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

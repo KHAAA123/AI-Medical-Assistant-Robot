@@ -1,0 +1,10 @@
+requests
+google-genai
+openpyxl
+pyserial
+
+# Tùy chọn — tầng dense retrieval (RAG semantic). Thiếu các gói này thì engine
+# tự rơi về hybrid lexical. Trên Jetson Nano dùng wheel ONNX Runtime của NVIDIA.
+# numpy
+# onnxruntime
+# tokenizers

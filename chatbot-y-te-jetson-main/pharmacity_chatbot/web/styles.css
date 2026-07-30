@@ -1,0 +1,354 @@
+:root {
+  color-scheme: light;
+  --bg: #eef7f6;
+  --panel: #ffffff;
+  --ink: #162329;
+  --muted: #607078;
+  --line: #dce7e5;
+  --accent: #087f8c;
+  --accent-strong: #05616b;
+  --soft-shadow: 0 24px 70px rgba(17, 60, 67, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  background:
+    linear-gradient(140deg, rgba(8, 127, 140, 0.16), transparent 42%),
+    var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: clamp(18px, 3vw, 42px);
+}
+
+.chat-panel {
+  display: grid;
+  grid-template-rows: auto minmax(220px, 1fr) auto auto auto;
+  width: min(1120px, 100%);
+  height: min(860px, calc(100dvh - 36px));
+  overflow: hidden;
+  border: 1px solid rgba(8, 127, 140, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--soft-shadow);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: clamp(18px, 2vw, 28px);
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.55rem, 3vw, 2.6rem);
+  line-height: 1.05;
+}
+
+.icon-button {
+  display: grid;
+  width: 52px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(8, 127, 140, 0.24);
+  border-radius: 8px;
+  background: #f7fcfb;
+  color: var(--accent);
+  font-size: 1.35rem;
+}
+
+.icon-button.listening {
+  border-color: var(--accent);
+  background: #e5f7f5;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+  padding: clamp(18px, 2.4vw, 34px);
+}
+
+.message {
+  max-width: min(760px, 86%);
+  padding: 14px 16px;
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: clamp(1rem, 1.15vw, 1.18rem);
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.message.bot {
+  align-self: flex-start;
+  background: #f2faf9;
+  border: 1px solid #d8ece9;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.message a {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent-strong);
+  font-weight: 800;
+}
+
+.product-area,
+.manual-panel {
+  margin: 0 clamp(18px, 2.4vw, 34px) 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfefd;
+}
+
+.product-area[hidden],
+.manual-panel[hidden] {
+  display: none;
+}
+
+.product-area-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.product-area-top span {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.product-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  min-height: 176px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  text-align: left;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.product-card:hover,
+.product-card:focus-visible,
+.product-card.selected {
+  border-color: rgba(8, 127, 140, 0.78);
+  box-shadow: 0 10px 28px rgba(17, 60, 67, 0.14);
+  transform: translateY(-1px);
+}
+
+.product-card:disabled {
+  opacity: 0.7;
+}
+
+.product-image {
+  display: grid;
+  aspect-ratio: 1.25 / 1;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #eef7f6;
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.product-image img {
+  width: 94%;
+  height: 94%;
+  object-fit: contain;
+}
+
+.product-name {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.manual-card {
+  place-items: center;
+  text-align: center;
+}
+
+.manual-icon {
+  display: grid;
+  width: 68px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 8px;
+  background: #e7f5f3;
+  color: var(--accent);
+  font-size: 1.8rem;
+}
+
+.manual-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.manual-panel label {
+  display: grid;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 850;
+}
+
+.manual-panel input,
+.composer input {
+  min-width: 0;
+  min-height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 14px;
+  color: var(--ink);
+  outline: none;
+}
+
+.manual-panel input:focus,
+.composer input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(8, 127, 140, 0.12);
+}
+
+.keyboard {
+  display: grid;
+  gap: 8px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.keyboard button,
+.manual-actions button,
+.composer button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 16px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 850;
+}
+
+.keyboard button {
+  min-width: 44px;
+  background: #e8f5f4;
+  color: var(--accent-strong);
+}
+
+.action-row button {
+  min-width: 92px;
+}
+
+.manual-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.manual-actions button:first-child {
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: clamp(18px, 2vw, 28px);
+  border-top: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.composer button {
+  min-width: 104px;
+}
+
+@media (max-width: 920px) {
+  .chat-panel {
+    height: calc(100dvh - 20px);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 0;
+  }
+
+  .chat-panel {
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .message {
+    max-width: 96%;
+  }
+
+  .product-grid,
+  .composer {
+    grid-template-columns: 1fr;
+  }
+}

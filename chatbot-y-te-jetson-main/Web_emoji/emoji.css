@@ -1,0 +1,356 @@
+/* Mascot emoji / bot face styles for the voice overlay. */
+
+.voice-emoji {
+  display: grid;
+  width: min(70vw, 124dvh, 1440px);
+  aspect-ratio: 1.45;
+  place-items: center;
+  filter: drop-shadow(0 30px 70px rgba(16, 24, 40, 0.16));
+}
+
+.bot-face {
+  position: relative;
+  width: 88%;
+  height: 80%;
+  overflow: visible;
+  border: 0;
+  border-radius: 34% 34% 13% 13% / 45% 45% 15% 15%;
+  background: transparent;
+  box-shadow: none;
+}
+
+.bot-eye {
+  position: absolute;
+  top: 31%;
+  z-index: 2;
+  display: grid;
+  width: 18%;
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 30%, rgba(255, 255, 255, 0.95) 0 8%, transparent 9%),
+    #f9fcff;
+  box-shadow:
+    inset 0 -7px 0 rgba(31, 43, 53, 0.13),
+    0 0 0 clamp(3px, 0.55vw, 5px) rgba(255, 255, 255, 0.1),
+    0 0 22px rgba(118, 246, 248, 0.18);
+  animation: botBlink 7s ease-in-out infinite;
+}
+
+.bot-eye-left {
+  left: 24%;
+}
+
+.bot-eye-right {
+  right: 24%;
+}
+
+.bot-pupil {
+  position: relative;
+  display: block;
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 27% 22%, #ffffff 0 10%, transparent 11%),
+    radial-gradient(circle at 40% 39%, rgba(255, 255, 255, 0.72) 0 3%, transparent 4%),
+    radial-gradient(circle at 56% 56%, #030812 0 30%, transparent 31%),
+    radial-gradient(circle, #0b7180 0 47%, #47eee5 48% 70%, #ccfffb 71%);
+  box-shadow:
+    inset 0 -6px 14px rgba(72, 246, 235, 0.48),
+    0 0 12px rgba(91, 245, 238, 0.32);
+  animation: botNaturalLook 8.5s ease-in-out infinite;
+  transition: transform 260ms ease;
+}
+
+.bot-brow {
+  position: absolute;
+  top: 16.8%;
+  z-index: 3;
+  width: 16.5%;
+  height: 9%;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.bot-brow::before {
+  content: "";
+  position: absolute;
+  inset: 20% 0 12%;
+  border-top: clamp(8px, 1.05vw, 14px) solid #7df5f5;
+  border-radius: 999px 999px 0 0 / 88% 88% 0 0;
+  filter:
+    drop-shadow(0 0 8px rgba(125, 245, 245, 0.82))
+    drop-shadow(0 0 18px rgba(125, 245, 245, 0.34));
+}
+
+.bot-brow-left {
+  left: 25%;
+  transform: rotate(-7deg);
+}
+
+.bot-brow-right {
+  right: 25%;
+  transform: rotate(7deg);
+}
+
+.bot-cheek {
+  position: absolute;
+  top: 59%;
+  z-index: 1;
+  width: 17%;
+  height: 12%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 34%, rgba(255, 255, 255, 0.5) 0 7%, transparent 8%),
+    radial-gradient(circle at 55% 54%, rgba(244, 72, 124, 0.92) 0 30%, rgba(232, 57, 105, 0.48) 55%, transparent 76%);
+  filter: blur(2.2px);
+  opacity: 0.92;
+  box-shadow: 0 0 clamp(18px, 3vw, 34px) rgba(255, 79, 130, 0.34);
+  animation: botCheekIdle 5.6s ease-in-out infinite;
+}
+
+.bot-cheek-left {
+  left: 13%;
+}
+
+.bot-cheek-right {
+  right: 13%;
+}
+
+.bot-mouth {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 23%;
+  width: 19%;
+  height: 10%;
+  overflow: hidden;
+  border: clamp(2px, 0.45vw, 4px) solid rgba(103, 132, 142, 0.46);
+  border-radius: 18% 18% 50% 50% / 28% 28% 72% 72%;
+  background:
+    radial-gradient(ellipse at 50% 112%, #ff7f9d 0 30%, transparent 31%),
+    linear-gradient(180deg, #642539 0%, #351823 100%);
+  filter:
+    drop-shadow(0 0 8px rgba(91, 245, 238, 0.2))
+    drop-shadow(0 5px 8px rgba(0, 0, 0, 0.14));
+  transform: translateX(-50%);
+  animation: none;
+}
+
+.bot-mouth::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -22%;
+  height: 48%;
+  border-radius: 50% 50% 0 0;
+  background: #ff7894;
+  box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.12);
+}
+
+.bot-expression-mark {
+  position: absolute;
+  z-index: 4;
+  width: 10%;
+  aspect-ratio: 1;
+  opacity: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(122, 246, 246, 0.58));
+}
+
+.bot-expression-mark::before,
+.bot-expression-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #82f5f4;
+  clip-path: polygon(50% 0, 61% 38%, 100% 50%, 61% 62%, 50% 100%, 39% 62%, 0 50%, 39% 38%);
+}
+
+.bot-expression-mark::after {
+  inset: 32%;
+}
+
+.bot-expression-mark-left {
+  left: 8%;
+  top: 31%;
+  transform: scale(0.78) rotate(-8deg);
+}
+
+.bot-expression-mark-right {
+  right: 8%;
+  top: 20%;
+  transform: scale(1.05) rotate(10deg);
+}
+
+
+.voice-emoji[data-expression="sad"] .bot-mouth {
+  bottom: 21%;
+  width: 17%;
+  height: 6%;
+  border: 0;
+  border-top: clamp(5px, 0.82vw, 8px) solid #6e858e;
+  border-radius: 999px 999px 0 0;
+  background: transparent;
+}
+
+.voice-emoji[data-expression="sad"] .bot-mouth::before,
+.voice-emoji[data-expression="neutral"] .bot-mouth::before {
+  display: none;
+}
+
+.voice-emoji[data-expression="neutral"] .bot-mouth {
+  bottom: 24%;
+  width: 15%;
+  height: clamp(5px, 0.55vw, 7px);
+  border: 0;
+  border-radius: 999px;
+  background: #6d8087;
+}
+
+.voice-emoji[data-expression="sad"] .bot-brow-left {
+  transform: rotate(22deg);
+}
+
+.voice-emoji[data-expression="sad"] .bot-brow-right {
+  transform: rotate(-22deg);
+}
+
+
+@keyframes voiceBreath {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes voiceThink {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes botNaturalLook {
+  0%,
+  12%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  18%,
+  27% {
+    transform: translate(-5%, -2%) scale(1.01);
+  }
+  35%,
+  47% {
+    transform: translate(4%, 2%) scale(1);
+  }
+  58%,
+  70% {
+    transform: translate(-2%, 4%) scale(0.99);
+  }
+  80%,
+  90% {
+    transform: translate(3%, -3%) scale(1.01);
+  }
+}
+
+@keyframes botFocusLook {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.16);
+  }
+}
+
+@keyframes botBlink {
+  0%,
+  45%,
+  49%,
+  100% {
+    transform: scaleY(1);
+  }
+  47% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes botCheekIdle {
+  0%,
+  100% {
+    opacity: 0.9;
+    filter: blur(2.2px) saturate(1);
+  }
+  48%,
+  56% {
+    opacity: 1;
+    filter: blur(1.7px) saturate(1.12);
+  }
+}
+
+@keyframes botCheekBloom {
+  0%,
+  100% {
+    opacity: 0.88;
+    filter: blur(2px) saturate(1);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(1.45px) saturate(1.24);
+  }
+}
+
+@keyframes botLipTalk {
+  0%,
+  100% {
+    width: 17%;
+    height: 7%;
+    transform: translateX(-50%) scaleY(0.82);
+  }
+  30% {
+    width: 20%;
+    height: 9.4%;
+    transform: translateX(-50%) scaleY(1.02);
+  }
+  58% {
+    width: 15%;
+    height: 5.4%;
+    transform: translateX(-50%) scaleY(0.66);
+  }
+  78% {
+    width: 21%;
+    height: 10.8%;
+    transform: translateX(-50%) scaleY(1.1);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .voice-emoji,
+  .voice-emoji *,
+  .voice-emoji *::before,
+  .voice-emoji *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .voice-emoji {
+    width: min(92vw, 78dvh, 1120px);
+  }
+}
