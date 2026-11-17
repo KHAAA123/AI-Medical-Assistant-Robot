@@ -1,6 +1,6 @@
 # Hanh Phuc RAG Engine
 
-Module này triển khai nền RAG local nhẹ cho `hanhphuc.jsonl`, bám theo `PROJECT_GOALS.md`: trả lời dựa trên dữ liệu bệnh viện, ưu tiên đúng và rõ, không chẩn đoán/kê đơn, và không tự kích hoạt Arduino.
+Module này triển khai nền RAG local nhẹ cho `hanhphuc.jsonl`, bám theo `docs/PROJECT_GOALS.md`: trả lời dựa trên dữ liệu bệnh viện, ưu tiên đúng và rõ, không chẩn đoán/kê đơn, và không tự kích hoạt Arduino.
 
 ## Thành phần đã có
 

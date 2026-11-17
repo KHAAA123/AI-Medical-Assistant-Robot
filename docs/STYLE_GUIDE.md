@@ -1,6 +1,6 @@
 # Style Web App - Mobile Robot Y Te
 
-File nay ghi nho phong cach giao dien hien tai cua du an, chu yeu tu `Web_new/index.html` va `Web_new/styles.css`. Khi them man hinh, sua component, hoac lam lai UI, uu tien giu dung tinh than nay.
+File nay ghi nho phong cach giao dien hien tai cua du an, chu yeu tu `Web_emoji/index.html` va `Web_emoji/styles.css`. Khi them man hinh, sua component, hoac lam lai UI, uu tien giu dung tinh than nay.
 
 ## Tinh than thiet ke
 
@@ -233,7 +233,7 @@ Neu can tao lai bot face, giu cau truc lop nhu sau:
 
 ## Icon va asset
 
-- Uu tien icon PNG trong `Web_new/assets/Icon`.
+- Uu tien icon PNG trong `Web_emoji/assets/Icon`.
 - Icon dang dung: `QR.png`, `Mic.png`, `huong_dan.png`, `Doctor.png`, `Data.png`, `Close.png`, `Back.png`, `Done.png`, `Play.png`, `logo-3i.png`, `Khung.png`.
 - Icon luon nam trong slot co aspect-ratio 1:1, `object-fit: contain`.
 - Neu icon loi load, co fallback text hoac ky tu don gian.
@@ -286,7 +286,7 @@ Khong nen:
 - Khong dung gradient tim/cam/den lam mau chinh.
 - Khong them qua nhieu decoration ngoai grid va gradient nen nhe.
 - Khong lam nut nho, text mong, kho cham.
-- Khong pha bo khung kiosk 16:9 neu dang o Web_new.
+- Khong pha bo khung kiosk 16:9 neu dang o Web_emoji.
 - Khong dung radius nho/sac canh cho component chinh.
 
 ## Mau component moi

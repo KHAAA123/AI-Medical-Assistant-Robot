@@ -145,7 +145,6 @@ const doctorSettingsFormEl = document.querySelector("#doctorSettingsForm");
 const apiProviderSelectEl = document.querySelector("#apiProviderSelect");
 const apiModelSelectEl = document.querySelector("#apiModelSelect");
 const apiBaseUrlInputEl = document.querySelector("#apiBaseUrlInput");
-const apiKeyInputEl = document.querySelector("#apiKeyInput");
 const volumeRangeEl = document.querySelector("#volumeRange");
 const volumeValueEl = document.querySelector("#volumeValue");
 const arduinoPortInputEl = document.querySelector("#arduinoPortInput");
@@ -492,7 +491,6 @@ function getDefaultDoctorSettings() {
     apiProvider: "chatgpt",
     apiModel: "gpt-4o-mini",
     apiBaseUrl: "",
-    apiKey: "",
     volume: 70,
     arduinoPort: "",
     arduinoBaudRate: 9600,
@@ -504,7 +502,12 @@ function loadDoctorSettings() {
   const defaults = getDefaultDoctorSettings();
   try {
     const saved = window.localStorage.getItem(DOCTOR_SETTINGS_STORAGE_KEY);
-    return saved ? { ...defaults, ...JSON.parse(saved) } : defaults;
+    if (!saved) {
+      return defaults;
+    }
+    // Drop credentials saved by older versions; they now live only in the server's .env.
+    const { apiKey, doctorUsername, doctorPassword, ...rest } = JSON.parse(saved);
+    return { ...defaults, ...rest };
   } catch (error) {
     console.warn("Cannot load doctor settings", error);
     return defaults;
@@ -525,7 +528,6 @@ function applyDoctorSettingsToForm() {
   apiProviderSelectEl.value = provider;
   populateApiModelOptions(provider, settings.apiModel);
   apiBaseUrlInputEl.value = settings.apiBaseUrl || "";
-  apiKeyInputEl.value = settings.apiKey || "";
   volumeRangeEl.value = String(settings.volume ?? 70);
   arduinoPortInputEl.value = settings.arduinoPort || "";
   arduinoBaudRateInputEl.value = "9600";
@@ -539,7 +541,6 @@ function collectDoctorSettingsFromForm() {
     apiProvider: apiProviderSelectEl.value,
     apiModel: apiModelSelectEl.value,
     apiBaseUrl: apiBaseUrlInputEl.value.trim(),
-    apiKey: apiKeyInputEl.value.trim(),
     volume: Number(volumeRangeEl.value || 70),
     arduinoPort: arduinoPortInputEl.value.trim(),
     arduinoBaudRate: 9600,

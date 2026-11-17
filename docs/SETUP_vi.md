@@ -39,6 +39,7 @@ nano .env
 Gia tri can sua trong `.env`:
 
 - `GEMINI_API_KEY`: API key Gemini.
+- `DOCTOR_USERNAME`, `DOCTOR_PASSWORD`: tai khoan dang nhap khu vuc bac si (bat buoc dat `DOCTOR_PASSWORD`).
 - `ROBOT_APP_HOST`: mac dinh `127.0.0.1` cho kiosk. Khong dung `0.0.0.0` khi cac API dieu khien robot chua co xac thuc server-side.
 - `ROBOT_APP_PORT`: mac dinh `8000`.
 - `ARDUINO_PORT`: thuong la `/dev/ttyACM0` hoac `/dev/ttyUSB0` tren Jetson.
