@@ -1,0 +1,17 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Runtime data and generated retrieval artifacts
+data/
+RAG/embeddings.npy
+RAG/dense_meta.json
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

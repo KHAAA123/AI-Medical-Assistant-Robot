@@ -55,7 +55,7 @@ Nếu `requires_hardware_confirmation = true`, UI chỉ được mở màn hình
 ## Luồng voice đề xuất
 
 1. Browser mở cloud realtime speech-to-speech qua WebRTC.
-2. UI giữ trạng thái theo `stype_wed.md`: `idle`, `listening`, `processing`, `speaking`, `error`.
+2. UI giữ trạng thái theo `docs/STYLE_GUIDE.md`: `idle`, `listening`, `processing`, `speaking`, `error`.
 3. Khi người dùng hỏi về bệnh viện, realtime agent gọi backend tool `rag_search(query, intent, filters)`.
 4. Agent chỉ trả lời dựa trên `answer_context` đã trả về.
 5. Nếu context có `needs_confirmation`, câu trả lời phải nhắc xác nhận qua hotline `1900 6765`.

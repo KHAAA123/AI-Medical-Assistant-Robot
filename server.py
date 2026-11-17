@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hmac
 import json
 import mimetypes
 import os
@@ -1060,6 +1061,9 @@ class RobotAssistantHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
+        if parsed.path == "/robot/api/doctor/login":
+            self._handle_doctor_login()
+            return
         if parsed.path == "/robot/api/rag/answer":
             self._handle_rag_answer()
             return
@@ -1193,6 +1197,30 @@ class RobotAssistantHandler(SimpleHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+
+    def _handle_doctor_login(self) -> None:
+        """Check doctor credentials on the server; they are read from .env, never shipped to the browser."""
+        expected_username = os.environ.get("DOCTOR_USERNAME", "doctor").strip()
+        expected_password = os.environ.get("DOCTOR_PASSWORD", "")
+        if not expected_password:
+            self._send_json(
+                {"ok": False, "detail": "Doctor login is not configured. Set DOCTOR_PASSWORD in .env."},
+                status=HTTPStatus.SERVICE_UNAVAILABLE,
+            )
+            return
+        try:
+            payload = self._read_json()
+        except ValueError:
+            self._send_json({"ok": False, "detail": "Invalid JSON body"}, status=HTTPStatus.BAD_REQUEST)
+            return
+        username = str(payload.get("username") or "").strip()
+        password = str(payload.get("password") or "")
+        username_ok = hmac.compare_digest(username.encode("utf-8"), expected_username.encode("utf-8"))
+        password_ok = hmac.compare_digest(password.encode("utf-8"), expected_password.encode("utf-8"))
+        if not (username_ok and password_ok):
+            self._send_json({"ok": False, "detail": "Invalid username or password"}, status=HTTPStatus.UNAUTHORIZED)
+            return
+        self._send_json({"ok": True})
 
     def _handle_rag_answer(self) -> None:
         try:

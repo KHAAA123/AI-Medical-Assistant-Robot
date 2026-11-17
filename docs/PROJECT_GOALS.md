@@ -86,7 +86,7 @@ Nếu sau này cần mở rộng, hệ thống có thể bổ sung tài khoản 
 
 ## 5. Phong cách giao diện web
 
-Phong cách giao diện cần bám theo tinh thần đã mô tả trong `stype_wed.md`: medical kiosk, touch-first, teal soft UI, chữ tiếng Việt lớn dễ đọc, card trắng trong nhẹ, khung robot bo góc lớn và các nút thao tác rõ ràng.
+Phong cách giao diện cần bám theo tinh thần đã mô tả trong `docs/STYLE_GUIDE.md`: medical kiosk, touch-first, teal soft UI, chữ tiếng Việt lớn dễ đọc, card trắng trong nhẹ, khung robot bo góc lớn và các nút thao tác rõ ràng.
 
 Định hướng giao diện:
 
@@ -132,7 +132,7 @@ Frontend chịu trách nhiệm:
 - Cho phép tra cứu thông tin bệnh viện.
 - Hiển thị trạng thái xử lý của AI, voice và thiết bị.
 - Cho phép người dùng xác nhận hoặc hủy thao tác phần cứng.
-- Đảm bảo trải nghiệm cảm ứng rõ ràng, dễ dùng và nhất quán với `stype_wed.md`.
+- Đảm bảo trải nghiệm cảm ứng rõ ràng, dễ dùng và nhất quán với `docs/STYLE_GUIDE.md`.
 
 Tài liệu này không khóa chặt framework cụ thể. Khi build, có thể chọn framework phù hợp, miễn là kiến trúc vẫn rõ module, dễ mở rộng và bám sát trải nghiệm sản phẩm đã nêu.
 
@@ -156,7 +156,7 @@ Mọi quyết định khi build webapp nên trả lời được các câu hỏi
 - Câu trả lời của AI có dựa trên dữ liệu bệnh viện đáng tin cậy không?
 - Người dùng có hiểu hệ thống đang nghe, xử lý, nói hay gặp lỗi không?
 - Thao tác liên quan đến phần cứng đã có bước xác nhận đủ rõ chưa?
-- Giao diện có bám phong cách medical kiosk trong `stype_wed.md` không?
+- Giao diện có bám phong cách medical kiosk trong `docs/STYLE_GUIDE.md` không?
 - Hệ thống có tránh đưa ra thông tin y tế vượt quá phạm vi hỗ trợ không?
 
 Nếu một thay đổi làm app rối hơn, khó hiểu hơn, dễ trả lời sai hơn hoặc tự động hóa phần cứng thiếu kiểm soát, thay đổi đó không phù hợp với mục tiêu của dự án.

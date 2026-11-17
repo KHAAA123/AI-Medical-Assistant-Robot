@@ -818,3 +818,35 @@ class DispenseCoordinatorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DoctorLoginTests(unittest.TestCase):
+    def _login(self, base_url, username, password):
+        request = Request(
+            f"{base_url}/robot/api/doctor/login",
+            data=json.dumps({"username": username, "password": password}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        return read_response(request)
+
+    def test_login_succeeds_with_server_side_credentials(self):
+        with mock.patch.dict(os.environ, {"DOCTOR_USERNAME": "doctor", "DOCTOR_PASSWORD": "s3cret"}):
+            with running_server(server.RobotAssistantHandler) as base_url:
+                response, payload = self._login(base_url, "doctor", "s3cret")
+        self.assertEqual(response.status, HTTPStatus.OK)
+        self.assertTrue(payload["ok"])
+
+    def test_login_rejects_wrong_password(self):
+        with mock.patch.dict(os.environ, {"DOCTOR_USERNAME": "doctor", "DOCTOR_PASSWORD": "s3cret"}):
+            with running_server(server.RobotAssistantHandler) as base_url:
+                response, payload = self._login(base_url, "doctor", "wrong")
+        self.assertEqual(response.status, HTTPStatus.UNAUTHORIZED)
+        self.assertFalse(payload["ok"])
+
+    def test_login_is_disabled_when_password_not_configured(self):
+        with mock.patch.dict(os.environ, {"DOCTOR_PASSWORD": ""}):
+            with running_server(server.RobotAssistantHandler) as base_url:
+                response, payload = self._login(base_url, "doctor", "")
+        self.assertEqual(response.status, HTTPStatus.SERVICE_UNAVAILABLE)
+        self.assertFalse(payload["ok"])

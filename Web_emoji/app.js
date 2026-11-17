@@ -151,8 +151,6 @@ const volumeValueEl = document.querySelector("#volumeValue");
 const arduinoPortInputEl = document.querySelector("#arduinoPortInput");
 const arduinoBaudRateInputEl = document.querySelector("#arduinoBaudRateInput");
 const arduinoTimeoutInputEl = document.querySelector("#arduinoTimeoutInput");
-const doctorUsernameInputEl = document.querySelector("#doctorUsernameInput");
-const doctorPasswordInputEl = document.querySelector("#doctorPasswordInput");
 const doctorSettingsErrorEl = document.querySelector("#doctorSettingsError");
 const excelUploadButtonEl = document.querySelector("#excelUploadButton");
 const excelUploadInputEl = document.querySelector("#excelUploadInput");
@@ -455,9 +453,7 @@ function initDoctorPanel() {
   doctorSettingsFormEl.addEventListener("submit", async (event) => {
     event.preventDefault();
     const nextSettings = collectDoctorSettingsFromForm();
-    if (!validateDoctorAccountSettings(nextSettings)) {
-      return;
-    }
+    clearDoctorSettingsError();
     state.doctorSettings = nextSettings;
     saveDoctorSettings(state.doctorSettings);
     const arduinoSettingsSaved = await syncArduinoSettings(nextSettings);
@@ -493,8 +489,6 @@ function initDoctorPanel() {
 
 function getDefaultDoctorSettings() {
   return {
-    doctorUsername: "doctor",
-    doctorPassword: "123546",
     apiProvider: "chatgpt",
     apiModel: "gpt-4o-mini",
     apiBaseUrl: "",
@@ -536,16 +530,12 @@ function applyDoctorSettingsToForm() {
   arduinoPortInputEl.value = settings.arduinoPort || "";
   arduinoBaudRateInputEl.value = "9600";
   arduinoTimeoutInputEl.value = String(settings.arduinoTimeout || 30000);
-  doctorUsernameInputEl.value = settings.doctorUsername || "doctor";
-  doctorPasswordInputEl.value = settings.doctorPassword || "123546";
   clearDoctorSettingsError();
   updateVolumeLabel();
 }
 
 function collectDoctorSettingsFromForm() {
   return {
-    doctorUsername: doctorUsernameInputEl.value.trim(),
-    doctorPassword: doctorPasswordInputEl.value.trim(),
     apiProvider: apiProviderSelectEl.value,
     apiModel: apiModelSelectEl.value,
     apiBaseUrl: apiBaseUrlInputEl.value.trim(),
@@ -568,19 +558,32 @@ function openDoctorArea() {
   doctorLoginUsernameInputEl.focus();
 }
 
-function handleDoctorLogin(event) {
+async function handleDoctorLogin(event) {
   event.preventDefault();
-  const settings = state.doctorSettings || getDefaultDoctorSettings();
   const username = doctorLoginUsernameInputEl.value.trim();
   const password = doctorLoginPasswordInputEl.value;
-  if (username === settings.doctorUsername && password === settings.doctorPassword) {
-    state.doctorAuthenticated = true;
-    clearDoctorLoginError();
-    doctorLoginFormEl.reset();
-    showScreen("doctor");
-    return;
+  let detail = "Tên đăng nhập hoặc mật khẩu không đúng.";
+  try {
+    const response = await fetch("/robot/api/doctor/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+    if (response.ok) {
+      state.doctorAuthenticated = true;
+      clearDoctorLoginError();
+      doctorLoginFormEl.reset();
+      showScreen("doctor");
+      return;
+    }
+    if (response.status === 503) {
+      detail = "Chưa cấu hình tài khoản bác sĩ trên server (DOCTOR_PASSWORD trong file .env).";
+    }
+  } catch (error) {
+    console.warn("Doctor login request failed", error);
+    detail = "Không kết nối được server để đăng nhập.";
   }
-  doctorLoginErrorEl.textContent = "Tên đăng nhập hoặc mật khẩu không đúng.";
+  doctorLoginErrorEl.textContent = detail;
   doctorLoginErrorEl.hidden = false;
   doctorLoginPasswordInputEl.value = "";
   doctorLoginPasswordInputEl.focus();
@@ -589,21 +592,6 @@ function handleDoctorLogin(event) {
 function clearDoctorLoginError() {
   doctorLoginErrorEl.textContent = "";
   doctorLoginErrorEl.hidden = true;
-}
-
-function validateDoctorAccountSettings(settings) {
-  clearDoctorSettingsError();
-  if (!settings.doctorUsername || !settings.doctorPassword) {
-    doctorSettingsErrorEl.textContent = "Tên đăng nhập và mật khẩu bác sĩ không được để trống.";
-    doctorSettingsErrorEl.hidden = false;
-    if (!settings.doctorUsername) {
-      doctorUsernameInputEl.focus();
-    } else {
-      doctorPasswordInputEl.focus();
-    }
-    return false;
-  }
-  return true;
 }
 
 function clearDoctorSettingsError() {

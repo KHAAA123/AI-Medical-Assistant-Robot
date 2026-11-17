@@ -18,11 +18,11 @@ Yeu cau Python 3.10 tro len. Tren Jetson, kiem tra truoc:
 python3 --version
 ```
 
-Clone repo private tu GitHub, sau do cai dependencies:
+Clone repo tu GitHub, sau do cai dependencies:
 
 ```bash
-git clone git@github.com:<your-user>/<your-private-repo>.git
-cd <your-private-repo>
+git clone https://github.com/KHAAA123/AI-Medical-Assistant-Robot.git
+cd AI-Medical-Assistant-Robot
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
