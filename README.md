@@ -2,7 +2,7 @@
 
 The voice and touch assistant of a hospital medicine-delivery robot, running on an **NVIDIA Jetson Nano**. Patients and staff can ask questions by voice or on the touch screen. Answers are grounded in hospital data through **retrieval-augmented generation (RAG)**, and authorized staff can dispense medicine from Arduino-controlled trays.
 
-> Part of the Autonomous Hospital Delivery Robot project. The navigation stack lives in [Hospital-dilivery-robot](https://github.com/KHAAA123/Hospital-dilivery-robot).
+> Part of the Autonomous Hospital Delivery Robot project. The navigation stack lives in [Hospital-delivery-robot](https://github.com/KHAAA123/Hospital-delivery-robot).
 
 ---
 
