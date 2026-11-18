@@ -111,4 +111,4 @@ UEH Robotics and Artificial Intelligence – Hospital Service Robot Project, Uni
 
 ## 📄 License
 
-Academic and research use.
+Released under the [MIT License](LICENSE). Bundled third-party files, such as `Web_emoji/vendor/jsQR.js`, keep their own licenses.
